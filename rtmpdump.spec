@@ -10,6 +10,7 @@ License:	GPLv2+
 # label its licence correctly. But the _tools_ are GPLv2.
 URL:		http://rtmpdump.mplayerhq.hu/
 Source0:	http://rtmpdump.mplayerhq.hu/download/rtmpdump-%{version}.tar.gz
+Patch1:		rtmpdump-link-gcrypt.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	gnutls-devel zlib-devel
@@ -20,6 +21,7 @@ including rtmp://, rtmpt://, rtmpe://, rtmpte://, and rtmps://.
 
 %prep
 %setup -q
+%patch1 -p1
 
 %build
 make CRYPTO=GNUTLS OPT="$RPM_OPT_FLAGS" progs
@@ -54,5 +56,8 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Apr 20 2010 David Woodhouse <dwmw2@infradead.org> 2.2c-2
+- Link with libgcrypt explicitly since we call it directly
+
 * Mon Apr 19 2010 David Woodhouse <dwmw2@infradead.org> 2.2c-1
 - Initial package
