@@ -1,0 +1,28 @@
+Author: hyc
+Date: Sun Apr 18 21:41:36 2010
+New Revision: 435
+
+Log:
+Windows GNUTLS needs explicit -lgcrypt
+
+Modified:
+   trunk/Makefile
+
+Modified: trunk/Makefile
+==============================================================================
+--- trunk/Makefile	Sun Apr 18 21:32:42 2010	(r434)
++++ trunk/Makefile	Sun Apr 18 21:41:36 2010	(r435)
+@@ -5,7 +5,7 @@ LD=$(CROSS_COMPILE)ld
+ 
+ CRYPTO=OPENSSL
+ #CRYPTO=GNUTLS
+-LIB_GNUTLS=-lgnutls
++LIB_GNUTLS=-lgnutls -lgcrypt
+ LIB_OPENSSL=-lssl -lcrypto
+ CRYPTO_LIB=$(LIB_$(CRYPTO))
+ DEF_=-DNO_CRYPTO
+_______________________________________________
+rtmpdump mailing list
+rtmpdump@mplayerhq.hu
+https://lists.mplayerhq.hu/mailman/listinfo/rtmpdump
+
