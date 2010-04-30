@@ -1,6 +1,6 @@
 Name:		rtmpdump
-Version:	2.2c
-Release:	2%{?dist}
+Version:	2.2d
+Release:	1%{?dist}
 Summary:	Toolkit for RTMP streams
 
 Group:		Applications/Internet
@@ -9,8 +9,7 @@ License:	GPLv2+
 # (for which you'd probably want to make it a dynamic library) you should
 # label its licence correctly. But the _tools_ are GPLv2.
 URL:		http://rtmpdump.mplayerhq.hu/
-Source0:	http://rtmpdump.mplayerhq.hu/download/rtmpdump-%{version}.tar.gz
-Patch1:		rtmpdump-link-gcrypt.patch
+Source0:	http://rtmpdump.mplayerhq.hu/download/rtmpdump-%{version}.tgz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	gnutls-devel zlib-devel
@@ -21,7 +20,6 @@ including rtmp://, rtmpt://, rtmpe://, rtmpte://, and rtmps://.
 
 %prep
 %setup -q
-%patch1 -p1
 
 %build
 make CRYPTO=GNUTLS OPT="$RPM_OPT_FLAGS" progs
@@ -56,6 +54,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 30 2010 David Woodhouse <dwmw2@infradead.org> 2.2d-1
+- Update to 2.2d
+
 * Tue Apr 20 2010 David Woodhouse <dwmw2@infradead.org> 2.2c-2
 - Link with libgcrypt explicitly since we call it directly
 
