@@ -1,6 +1,6 @@
 Name:		rtmpdump
 Version:	2.3
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Toolkit for RTMP streams
 
 Group:		Applications/Internet
@@ -31,6 +31,7 @@ including rtmp://, rtmpt://, rtmpe://, rtmpte://, and rtmps://.
 Summary:	Files for librtmp development
 Group:		Applications/Internet
 License:	LGPLv2+
+Requires:	librtmp = %{version}-%{release}
 
 %description -n librtmp-devel
 librtmp is a suport library for RTMP streams. The librtmp-devel package
@@ -52,6 +53,9 @@ rm -f $RPM_BUILD_ROOT/%{_libdir}/librtmp.a
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post -n librtmp -p /sbin/ldconfig
+
+%postun -n librtmp -p /sbin/ldconfig
 
 %files
 %defattr(-,root,root,-)
@@ -77,6 +81,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog
 
 %changelog
+* Sun Jul 04 2010 Dominik Mierzejewski <rpm@greysector.net> 2.3-2
+- call ldconfig in post(un) scripts for the shared library
+- add strict dependency on the library to -devel
+
 * Sun Jul 04 2010 David Woodhouse <dwmw2@infradead.org> 2.3-1
 - Update to 2.3; build shared library
 
