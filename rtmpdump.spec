@@ -1,6 +1,9 @@
+%define snapshot c58cfb3e
+%define snapshot_date 20110811
+
 Name:		rtmpdump
-Version:	2.3
-Release:	2%{?dist}
+Version:	2.4
+Release:	0.1.%{snapshot_date}git%{snapshot}%{?dist}
 Summary:	Toolkit for RTMP streams
 
 Group:		Applications/Internet
@@ -9,7 +12,7 @@ License:	GPLv2+
 # (for which you'd probably want to make it a dynamic library) you should
 # label its licence correctly. But the _tools_ are GPLv2.
 URL:		http://rtmpdump.mplayerhq.hu/
-Source0:	http://rtmpdump.mplayerhq.hu/download/rtmpdump-%{version}.tgz
+Source0:	http://rtmpdump.mplayerhq.hu/download/rtmpdump-%{snapshot_date}-g%{snapshot}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	gnutls-devel zlib-devel
@@ -38,12 +41,11 @@ librtmp is a suport library for RTMP streams. The librtmp-devel package
 contains include files needed to develop applications using librtmp.
 
 %prep
-%setup -q
+%setup -q -n rtmpdump-%{snapshot_date}-g%{snapshot}
 
 %build
 # The fact that we have to add -ldl for gnutls is Fedora bug #611318
-make CRYPTO=GNUTLS SHARED=yes OPT="$RPM_OPT_FLAGS" LIB_GNUTLS="-lgnutls -lgcrypt -ldl" LIBRTMP=librtmp/librtmp.so LIBS=
-
+make CRYPTO=GNUTLS SHARED=yes OPT="$RPM_OPT_FLAGS" LIB_GNUTLS="-lgnutls -lgcrypt -ldl"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -81,6 +83,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog
 
 %changelog
+* Mon Aug 29 2011 David Woodhouse <dwmw2@infradead.org> 2.4-0.1.20110811gitc58cfb3e
+- Update to almost-2.4 snapshot
+
 * Sun Jul 04 2010 Dominik Mierzejewski <rpm@greysector.net> 2.3-2
 - call ldconfig in post(un) scripts for the shared library
 - add strict dependency on the library to -devel
