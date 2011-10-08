@@ -1,6 +1,6 @@
 Name:		rtmpdump
 Version:	2.3
-Release:	2%{?dist}
+Release:	2%{?dist}.1
 Summary:	Toolkit for RTMP streams
 
 Group:		Applications/Internet
@@ -81,6 +81,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog
 
 %changelog
+* Sat Oct 08 2011 Nicolas Chauvet <kwizart@gmail.com> - 2.3-2.1
+- Rebuilt for target i686
+
 * Sun Jul 04 2010 Dominik Mierzejewski <rpm@greysector.net> 2.3-2
 - call ldconfig in post(un) scripts for the shared library
 - add strict dependency on the library to -devel
