@@ -3,7 +3,7 @@
 
 Name:		rtmpdump
 Version:	2.4
-Release:	0.1.%{snapshot_date}git%{snapshot}%{?dist}
+Release:	0.2.%{snapshot_date}git%{snapshot}%{?dist}
 Summary:	Toolkit for RTMP streams
 
 Group:		Applications/Internet
@@ -83,6 +83,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog
 
 %changelog
+* Wed Jan 25 2012 Nicolas Chauvet <kwizart@gmail.com> - 2.4-0.2.20110811gitc58cfb3e
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Mon Aug 29 2011 David Woodhouse <dwmw2@infradead.org> 2.4-0.1.20110811gitc58cfb3e
 - Update to almost-2.4 snapshot
 
