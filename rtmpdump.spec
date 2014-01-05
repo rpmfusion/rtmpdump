@@ -14,6 +14,7 @@ URL:            http://rtmpdump.mplayerhq.hu/
 Source0:        http://repo.or.cz/w/rtmpdump.git/snapshot/%{commit}.tar.gz
 
 BuildRequires:  gnutls-devel
+BuildRequires:  libgcrypt-devel
 BuildRequires:  zlib-devel
 BuildRequires:  nettle-devel
 
