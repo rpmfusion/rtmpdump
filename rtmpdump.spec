@@ -1,88 +1,83 @@
-%define snapshot c58cfb3e
-%define snapshot_date 20110811
+%global commit dc76f0a8461e6c8f1277eba58eae201b2dc1d06a
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
+%global gitdate 20131205
 
-Name:		rtmpdump
-Version:	2.4
-Release:	0.3.%{snapshot_date}git%{snapshot}%{?dist}
-Summary:	Toolkit for RTMP streams
+Name:           rtmpdump
+Version:        2.4
+Release:        1.%{gitdate}.git%{shortcommit}%{?dist}
+Summary:        Toolkit for RTMP streams
 
-Group:		Applications/Internet
-License:	GPLv2+
-# Note that librtmp is actually LGPLv2, so if you package that separately
-# (for which you'd probably want to make it a dynamic library) you should
-# label its licence correctly. But the _tools_ are GPLv2.
-URL:		http://rtmpdump.mplayerhq.hu/
-Source0:	http://rtmpdump.mplayerhq.hu/download/rtmpdump-%{snapshot_date}-g%{snapshot}.tar.gz
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Group:          Applications/Internet
+# The tools are GPLv2+. The library is LGPLv2+, see below.
+License:        GPLv2+
+URL:            http://rtmpdump.mplayerhq.hu/
+Source0:        http://repo.or.cz/w/rtmpdump.git/snapshot/%{commit}.tar.gz
 
-BuildRequires:	gnutls-devel zlib-devel
+BuildRequires:  gnutls-devel
+BuildRequires:  zlib-devel
+BuildRequires:  nettle-devel
 
 %description
 rtmpdump is a toolkit for RTMP streams. All forms of RTMP are supported,
 including rtmp://, rtmpt://, rtmpe://, rtmpte://, and rtmps://. 
 
 %package -n librtmp
-Summary:	Support library for RTMP streams
-Group:		Applications/Internet
-License:	LGPLv2+
+Summary:        Support library for RTMP streams
+Group:          Applications/Internet
+License:        LGPLv2+
 
 %description -n librtmp
-librtmp is a suport library for RTMP streams. All forms of RTMP are supported,
+librtmp is a support library for RTMP streams. All forms of RTMP are supported,
 including rtmp://, rtmpt://, rtmpe://, rtmpte://, and rtmps://. 
 
 %package -n librtmp-devel
-Summary:	Files for librtmp development
-Group:		Applications/Internet
-License:	LGPLv2+
-Requires:	librtmp = %{version}-%{release}
+Summary:        Files for librtmp development
+Group:          Applications/Internet
+License:        LGPLv2+
+Requires:       librtmp%{?_isa} = %{version}-%{release}
 
 %description -n librtmp-devel
-librtmp is a suport library for RTMP streams. The librtmp-devel package
+librtmp is a support library for RTMP streams. The librtmp-devel package
 contains include files needed to develop applications using librtmp.
 
 %prep
-%setup -q -n rtmpdump-%{snapshot_date}-g%{snapshot}
+%setup -q -n %{name}
 
 %build
 # The fact that we have to add -ldl for gnutls is Fedora bug #611318
-make CRYPTO=GNUTLS SHARED=yes OPT="$RPM_OPT_FLAGS" LIB_GNUTLS="-lgnutls -lgcrypt -ldl"
+make SYS=posix CRYPTO=GNUTLS SHARED=yes OPT="%{optflags}" LIB_GNUTLS="-lgnutls -lgcrypt -ldl"
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make CRYPTO=GNUTLS SHARED=yes DESTDIR=$RPM_BUILD_ROOT prefix=/usr mandir=%{_mandir} libdir=%{_libdir} install
-rm -f $RPM_BUILD_ROOT/%{_libdir}/librtmp.a
-
-%clean
-rm -rf $RPM_BUILD_ROOT
+make CRYPTO=GNUTLS SHARED=yes DESTDIR=%{buildroot} prefix=%{_prefix} mandir=%{_mandir} libdir=%{_libdir} install
+rm -f %{buildroot}%{_libdir}/librtmp.a
 
 %post -n librtmp -p /sbin/ldconfig
-
 %postun -n librtmp -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root,-)
+%doc COPYING README
 %{_bindir}/rtmpdump
 %{_sbindir}/rtmpsrv
 %{_sbindir}/rtmpgw
 %{_sbindir}/rtmpsuck
 %{_mandir}/man1/rtmpdump.1*
 %{_mandir}/man8/rtmpgw.8*
-%doc COPYING README
 
 %files -n librtmp
-%defattr(-,root,root,-)
-%{_libdir}/librtmp.so.0
-%doc librtmp/COPYING
+%doc librtmp/COPYING ChangeLog
+%{_libdir}/librtmp.so.1
 
 %files -n librtmp-devel
-%defattr(-,root,root,-)
-/usr/include/librtmp
+%{_includedir}/librtmp/
 %{_libdir}/librtmp.so
 %{_libdir}/pkgconfig/librtmp.pc
 %{_mandir}/man3/librtmp.3*
-%doc ChangeLog
 
 %changelog
+* Sun Jan 5 2014 Susi Lehtola <jussilehtola@fedoraproject.org> - 2.4-1.20131205.gitdc76f0a
+- Update to newest snapshot.
+- Clean up spec file.
+
 * Sun Mar 03 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.4-0.3.20110811gitc58cfb3e
 - Mass rebuilt for Fedora 19 Features
 
