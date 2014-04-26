@@ -4,7 +4,7 @@
 
 Name:           rtmpdump
 Version:        2.4
-Release:        1.%{gitdate}.git%{shortcommit}%{?dist}
+Release:        2.%{gitdate}.git%{shortcommit}%{?dist}
 Summary:        Toolkit for RTMP streams
 
 Group:          Applications/Internet
@@ -75,6 +75,9 @@ rm -f %{buildroot}%{_libdir}/librtmp.a
 %{_mandir}/man3/librtmp.3*
 
 %changelog
+* Sat Apr 26 2014 Nicolas Chauvet <kwizart@gmail.com> - 2.4-2.20131205.gitdc76f0a
+- Rebuilt for libgcrypt
+
 * Sun Jan 5 2014 Susi Lehtola <jussilehtola@fedoraproject.org> - 2.4-1.20131205.gitdc76f0a
 - Update to newest snapshot.
 - Clean up spec file.
