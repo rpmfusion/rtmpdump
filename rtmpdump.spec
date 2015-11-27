@@ -4,14 +4,14 @@
 
 Name:           rtmpdump
 Version:        2.4
-Release:        4.%{gitdate}.git%{shortcommit}%{?dist}
+Release:        5.%{gitdate}.git%{shortcommit}%{?dist}
 Summary:        Toolkit for RTMP streams
 
 Group:          Applications/Internet
 # The tools are GPLv2+. The library is LGPLv2+, see below.
 License:        GPLv2+
 URL:            http://rtmpdump.mplayerhq.hu/
-Source0:        http://repo.or.cz/w/rtmpdump.git/snapshot/%{commit}.tar.gz#/rtmpdump-%{shortcommit}.tar.gz
+Source0:        http://repo.or.cz/w/rtmpdump.git/snapshot/%{commit}.tar.gz
 
 BuildRequires:  gnutls-devel
 BuildRequires:  libgcrypt-devel
@@ -75,6 +75,9 @@ rm -f %{buildroot}%{_libdir}/librtmp.a
 %{_mandir}/man3/librtmp.3*
 
 %changelog
+* Fri Nov 27 2015 Susi Lehtola <jussilehtola@fedoraproject.org> - 2.4-5.20150925.gita107cef
+- Fix name of tarball in Sérgio's patch.
+
 * Fri Sep 25 2015 Sérgio Basto <sergio@serjux.com> - 2.4-4.20150925.gita107cef
 - Update to git dc76f0a, Jan 14 2015
 
