@@ -1,17 +1,17 @@
-%global commit a107cef9b392616dff54fabfd37f985ee2190a6f
+%global commit fa8646daeb19dfd12c181f7d19de708d623704c0
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global gitdate 20150925
+%global gitdate 20160224
 
 Name:           rtmpdump
 Version:        2.4
-Release:        5.%{gitdate}.git%{shortcommit}%{?dist}
+Release:        6.%{gitdate}.git%{shortcommit}%{?dist}
 Summary:        Toolkit for RTMP streams
 
 Group:          Applications/Internet
 # The tools are GPLv2+. The library is LGPLv2+, see below.
 License:        GPLv2+
 URL:            http://rtmpdump.mplayerhq.hu/
-Source0:        http://repo.or.cz/w/rtmpdump.git/snapshot/%{commit}.tar.gz
+Source0:        http://repo.or.cz/w/rtmpdump.git/snapshot/%{commit}.tar.gz#/rtmpdump-%{shortcommit}.tar.gz
 
 BuildRequires:  gnutls-devel
 BuildRequires:  libgcrypt-devel
@@ -20,7 +20,7 @@ BuildRequires:  nettle-devel
 
 %description
 rtmpdump is a toolkit for RTMP streams. All forms of RTMP are supported,
-including rtmp://, rtmpt://, rtmpe://, rtmpte://, and rtmps://. 
+including rtmp://, rtmpt://, rtmpe://, rtmpte://, and rtmps://.
 
 %package -n librtmp
 Summary:        Support library for RTMP streams
@@ -29,7 +29,7 @@ License:        LGPLv2+
 
 %description -n librtmp
 librtmp is a support library for RTMP streams. All forms of RTMP are supported,
-including rtmp://, rtmpt://, rtmpe://, rtmpte://, and rtmps://. 
+including rtmp://, rtmpt://, rtmpe://, rtmpte://, and rtmps://.
 
 %package -n librtmp-devel
 Summary:        Files for librtmp development
@@ -56,7 +56,8 @@ rm -f %{buildroot}%{_libdir}/librtmp.a
 %postun -n librtmp -p /sbin/ldconfig
 
 %files
-%doc COPYING README
+%doc README
+%license COPYING
 %{_bindir}/rtmpdump
 %{_sbindir}/rtmpsrv
 %{_sbindir}/rtmpgw
@@ -65,7 +66,8 @@ rm -f %{buildroot}%{_libdir}/librtmp.a
 %{_mandir}/man8/rtmpgw.8*
 
 %files -n librtmp
-%doc librtmp/COPYING ChangeLog
+%doc ChangeLog
+%license librtmp/COPYING
 %{_libdir}/librtmp.so.1
 
 %files -n librtmp-devel
@@ -75,6 +77,10 @@ rm -f %{buildroot}%{_libdir}/librtmp.a
 %{_mandir}/man3/librtmp.3*
 
 %changelog
+* Sun Jul 10 2016 Sérgio Basto <sergio@serjux.com> - 2.4-6.20160224.gitfa8646d
+- Update last git version (as usual)
+- Add license tag.
+
 * Fri Nov 27 2015 Susi Lehtola <jussilehtola@fedoraproject.org> - 2.4-5.20150925.gita107cef
 - Fix name of tarball in Sérgio's patch.
 
