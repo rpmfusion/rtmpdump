@@ -4,7 +4,7 @@
 
 Name:           rtmpdump
 Version:        2.4
-Release:        6.%{gitdate}.git%{shortcommit}%{?dist}
+Release:        7.%{gitdate}.git%{shortcommit}%{?dist}
 Summary:        Toolkit for RTMP streams
 
 Group:          Applications/Internet
@@ -17,6 +17,9 @@ BuildRequires:  gnutls-devel
 BuildRequires:  libgcrypt-devel
 BuildRequires:  zlib-devel
 BuildRequires:  nettle-devel
+
+# we should force the exact EVR for an ISA - not only the same ABI
+Requires: librtmp%{?_isa} = %{version}-%{release}
 
 %description
 rtmpdump is a toolkit for RTMP streams. All forms of RTMP are supported,
@@ -77,6 +80,9 @@ rm -f %{buildroot}%{_libdir}/librtmp.a
 %{_mandir}/man3/librtmp.3*
 
 %changelog
+* Sun Jul 24 2016 Sérgio Basto <sergio@serjux.com> - 2.4-7.20160224.gitfa8646d
+- Force the exact EVR
+
 * Sun Jul 10 2016 Sérgio Basto <sergio@serjux.com> - 2.4-6.20160224.gitfa8646d
 - Update last git version (as usual)
 - Add license tag.
