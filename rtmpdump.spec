@@ -4,7 +4,7 @@
 
 Name:           rtmpdump
 Version:        2.4
-Release:        7.%{gitdate}.git%{shortcommit}%{?dist}
+Release:        8.%{gitdate}.git%{shortcommit}%{?dist}
 Summary:        Toolkit for RTMP streams
 
 Group:          Applications/Internet
@@ -80,6 +80,9 @@ rm -f %{buildroot}%{_libdir}/librtmp.a
 %{_mandir}/man3/librtmp.3*
 
 %changelog
+* Mon Mar 20 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 2.4-8.20160224.gitfa8646d
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Sun Jul 24 2016 Sérgio Basto <sergio@serjux.com> - 2.4-7.20160224.gitfa8646d
 - Force the exact EVR
 
