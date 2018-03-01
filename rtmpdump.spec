@@ -49,14 +49,13 @@ contains include files needed to develop applications using librtmp.
 
 %build
 # The fact that we have to add -ldl for gnutls is Fedora bug #611318
-make SYS=posix CRYPTO=GNUTLS SHARED=yes OPT="%{optflags}" LIB_GNUTLS="-lgnutls -lgcrypt -ldl"
+make SYS=posix CRYPTO=GNUTLS SHARED=yes OPT="%{optflags}" LIB_GNUTLS="-lgnutls -lgcrypt -ldl -lz"
 
 %install
 make CRYPTO=GNUTLS SHARED=yes DESTDIR=%{buildroot} prefix=%{_prefix} mandir=%{_mandir} libdir=%{_libdir} install
 rm -f %{buildroot}%{_libdir}/librtmp.a
 
-%post -n librtmp -p /sbin/ldconfig
-%postun -n librtmp -p /sbin/ldconfig
+%ldconfig_scriptlets librtmp
 
 %files
 %doc README
