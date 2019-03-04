@@ -7,12 +7,12 @@ Version:        2.4
 Release:        13.%{gitdate}.git%{shortcommit}%{?dist}
 Summary:        Toolkit for RTMP streams
 
-Group:          Applications/Internet
 # The tools are GPLv2+. The library is LGPLv2+, see below.
 License:        GPLv2+
 URL:            http://rtmpdump.mplayerhq.hu/
 Source0:        http://repo.or.cz/w/rtmpdump.git/snapshot/%{commit}.tar.gz#/rtmpdump-%{shortcommit}.tar.gz
 
+BuildRequires:  gcc
 BuildRequires:  gnutls-devel
 BuildRequires:  libgcrypt-devel
 BuildRequires:  zlib-devel
@@ -27,7 +27,6 @@ including rtmp://, rtmpt://, rtmpe://, rtmpte://, and rtmps://.
 
 %package -n librtmp
 Summary:        Support library for RTMP streams
-Group:          Applications/Internet
 License:        LGPLv2+
 
 %description -n librtmp
@@ -36,7 +35,6 @@ including rtmp://, rtmpt://, rtmpe://, rtmpte://, and rtmps://.
 
 %package -n librtmp-devel
 Summary:        Files for librtmp development
-Group:          Applications/Internet
 License:        LGPLv2+
 Requires:       librtmp%{?_isa} = %{version}-%{release}
 
@@ -81,6 +79,8 @@ rm -f %{buildroot}%{_libdir}/librtmp.a
 %changelog
 * Mon Mar 04 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.4-13.20160224.gitfa8646d
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+- Remove Group tag
+- Add BuildRequires:  gcc
 
 * Sun Aug 19 2018 Leigh Scott <leigh123linux@googlemail.com> - 2.4-12.20160224.gitfa8646d
 - Rebuilt for Fedora 29 Mass Rebuild binutils issue
