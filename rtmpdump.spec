@@ -1,10 +1,10 @@
-%global commit fa8646daeb19dfd12c181f7d19de708d623704c0
+%global commit c5f04a58fc2aeea6296ca7c44ee4734c18401aa3
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global gitdate 20160224
+%global gitdate 20190330
 
 Name:           rtmpdump
 Version:        2.4
-Release:        13.%{gitdate}.git%{shortcommit}%{?dist}
+Release:        14.%{gitdate}.git%{shortcommit}%{?dist}
 Summary:        Toolkit for RTMP streams
 
 # The tools are GPLv2+. The library is LGPLv2+, see below.
@@ -77,6 +77,9 @@ rm -f %{buildroot}%{_libdir}/librtmp.a
 %{_mandir}/man3/librtmp.3*
 
 %changelog
+* Tue Jul 09 2019 Sérgio Basto <sergio@serjux.com> - 2.4-14.20190330.gitc5f04a5
+- Add the latest 2 commits, they appear to be security commits.
+
 * Mon Mar 04 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.4-13.20160224.gitfa8646d
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 - Remove Group tag
