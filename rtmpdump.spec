@@ -4,7 +4,7 @@
 
 Name:           rtmpdump
 Version:        2.4
-Release:        21.%{gitdate}.git%{shortcommit}%{?dist}
+Release:        22.%{gitdate}.git%{shortcommit}%{?dist}
 Summary:        Toolkit for RTMP streams
 
 # The tools are GPLv2+. The library is LGPLv2+, see below.
@@ -77,6 +77,10 @@ rm -f %{buildroot}%{_libdir}/librtmp.a
 %{_mandir}/man3/librtmp.3*
 
 %changelog
+* Sun Aug 07 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 2.4-22.20190330.gitc5f04a5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
+  5.1
+
 * Wed Feb 09 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 2.4-21.20190330.gitc5f04a5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
