@@ -10,7 +10,7 @@ Summary:        Toolkit for RTMP streams
 # The tools are GPLv2+. The library is LGPLv2+, see below.
 License:        GPLv2+
 URL:            https://rtmpdump.mplayerhq.hu/
-Source0:        https://git.ffmpeg.org/gitweb/rtmpdump.git/snapshot/%{commit}.tar.gz#rtmpdump-%{shortcommit}.tar.gz
+Source0:        https://git.ffmpeg.org/gitweb/rtmpdump.git/snapshot/%{commit}.tar.gz#/rtmpdump-%{shortcommit}.tar.gz
 
 BuildRequires:  gcc
 BuildRequires:  gnutls-devel
