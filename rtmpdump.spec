@@ -1,16 +1,16 @@
-%global commit c5f04a58fc2aeea6296ca7c44ee4734c18401aa3
+%global commit f1b83c10d8beb43fcc70a6e88cf4325499f25857
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global gitdate 20190330
+%global gitdate 20210219
 
 Name:           rtmpdump
 Version:        2.4
-Release:        22.%{gitdate}.git%{shortcommit}%{?dist}
+Release:        23.%{gitdate}.git%{shortcommit}%{?dist}
 Summary:        Toolkit for RTMP streams
 
 # The tools are GPLv2+. The library is LGPLv2+, see below.
 License:        GPLv2+
-URL:            http://rtmpdump.mplayerhq.hu/
-Source0:        http://repo.or.cz/w/rtmpdump.git/snapshot/%{commit}.tar.gz#/rtmpdump-%{shortcommit}.tar.gz
+URL:            https://rtmpdump.mplayerhq.hu/
+Source0:        https://git.ffmpeg.org/gitweb/rtmpdump.git/snapshot/%{commit}.tar.gz#rtmpdump-%{shortcommit}.tar.gz
 
 BuildRequires:  gcc
 BuildRequires:  gnutls-devel
@@ -77,6 +77,9 @@ rm -f %{buildroot}%{_libdir}/librtmp.a
 %{_mandir}/man3/librtmp.3*
 
 %changelog
+* Fri Jul 28 2023 Nicolas Chauvet <kwizart@gmail.com> - 2.4-23.20210219.gitf1b83c1
+- Switch git repo urls
+
 * Sun Aug 07 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 2.4-22.20190330.gitc5f04a5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
   5.1
