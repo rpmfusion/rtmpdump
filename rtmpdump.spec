@@ -11,6 +11,7 @@ Summary:        Toolkit for RTMP streams
 License:        GPLv2+
 URL:            https://rtmpdump.mplayerhq.hu/
 Source0:        https://git.ffmpeg.org/gitweb/rtmpdump.git/snapshot/%{commit}.tar.gz#/rtmpdump-%{shortcommit}.tar.gz
+Patch0:         gcc14_buildfix.patch
 
 BuildRequires:  gcc
 BuildRequires:  gnutls-devel
@@ -43,7 +44,7 @@ librtmp is a support library for RTMP streams. The librtmp-devel package
 contains include files needed to develop applications using librtmp.
 
 %prep
-%setup -q -n %{name}-%{shortcommit}
+%autosetup -p1 -n %{name}-%{shortcommit}
 
 %build
 # The fact that we have to add -ldl for gnutls is Fedora bug #611318
