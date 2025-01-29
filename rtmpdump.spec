@@ -51,7 +51,7 @@ contains include files needed to develop applications using librtmp.
 make SYS=posix CRYPTO=GNUTLS SHARED=yes OPT="%{optflags}" LIB_GNUTLS="-lgnutls -lgcrypt -ldl -lz"
 
 %install
-make CRYPTO=GNUTLS SHARED=yes DESTDIR=%{buildroot} prefix=%{_prefix} mandir=%{_mandir} libdir=%{_libdir} install
+make CRYPTO=GNUTLS SHARED=yes DESTDIR=%{buildroot} prefix=%{_prefix} mandir=%{_mandir} libdir=%{_libdir} sbindir=%{_sbindir} install
 rm -f %{buildroot}%{_libdir}/librtmp.a
 
 %ldconfig_scriptlets librtmp
